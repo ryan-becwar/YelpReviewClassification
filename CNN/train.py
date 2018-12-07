@@ -26,8 +26,8 @@ tf.flags.DEFINE_float("l2_reg_lambda", 0.0, "L2 regularization lambda (default: 
 
 # Training parameters
 tf.flags.DEFINE_integer("batch_size", 16, "Batch Size (default: 64)")
-tf.flags.DEFINE_integer("num_epochs", 2, "Number of training epochs (default: 200)")
-tf.flags.DEFINE_integer("evaluate_every", 20, "Evaluate model on dev set after this many steps (default: 100)")
+tf.flags.DEFINE_integer("num_epochs", 1, "Number of training epochs (default: 200)")
+tf.flags.DEFINE_integer("evaluate_every", 50, "Evaluate model on dev set after this many steps (default: 100)")
 tf.flags.DEFINE_integer("checkpoint_every", 20, "Save model after this many steps (default: 100)")
 tf.flags.DEFINE_integer("num_checkpoints", 5, "Number of checkpoints to store (default: 5)")
 # Misc Parameters
@@ -40,6 +40,9 @@ FLAGS = tf.flags.FLAGS
 # for attr, value in sorted(FLAGS.__flags.items()):
 #     print("{}={}".format(attr.upper(), value))
 # print("")
+
+accuracies = []
+steps = []
 
 def preprocess():
     # Data Preparation
@@ -173,6 +176,9 @@ def train(x_train, y_train, vocab_processor, x_dev, y_dev):
                 if writer:
                     writer.add_summary(summaries, step)
 
+                accuracies.append(accuracy)
+                steps.append(step)
+
             # Generate batches
             batches = data_helpers.batch_iter(
                 list(zip(x_train, y_train)), FLAGS.batch_size, FLAGS.num_epochs)
@@ -192,6 +198,14 @@ def train(x_train, y_train, vocab_processor, x_dev, y_dev):
 def main(argv=None):
     x_train, y_train, vocab_processor, x_dev, y_dev = preprocess()
     train(x_train, y_train, vocab_processor, x_dev, y_dev)
+
+    import matplotlib.pyplot as plt
+    plt.plot(steps, accuracies)
+    plt.xlabel('Iterations')
+    plt.ylabel('Accuracy')
+    # plt.show()
+    plt.savefig('cnn_acc.png',dpi=300)
+    plt.close()
 
 if __name__ == '__main__':
     tf.app.run()
