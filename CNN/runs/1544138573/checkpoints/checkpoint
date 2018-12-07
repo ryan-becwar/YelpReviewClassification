@@ -1,0 +1,6 @@
+model_checkpoint_path: "/s/chopin/l/grad/rbecwar/code/cnn-text-classification-tf/runs/1544138573/checkpoints/model-660"
+all_model_checkpoint_paths: "/s/chopin/l/grad/rbecwar/code/cnn-text-classification-tf/runs/1544138573/checkpoints/model-580"
+all_model_checkpoint_paths: "/s/chopin/l/grad/rbecwar/code/cnn-text-classification-tf/runs/1544138573/checkpoints/model-600"
+all_model_checkpoint_paths: "/s/chopin/l/grad/rbecwar/code/cnn-text-classification-tf/runs/1544138573/checkpoints/model-620"
+all_model_checkpoint_paths: "/s/chopin/l/grad/rbecwar/code/cnn-text-classification-tf/runs/1544138573/checkpoints/model-640"
+all_model_checkpoint_paths: "/s/chopin/l/grad/rbecwar/code/cnn-text-classification-tf/runs/1544138573/checkpoints/model-660"
