@@ -38,6 +38,8 @@ print("")
 if FLAGS.eval_train:
     #x_raw, y_test = data_helpers.load_data_and_labels(FLAGS.positive_data_file, FLAGS.negative_data_file)
     x_raw, y_test = data_helpers.yelp_load_data()
+    x_raw = x_raw[4000:]
+    y_test = y_test[4000:]
     y_test = np.argmax(y_test, axis=1)
 else:
     x_raw = ["a masterpiece four years in the making", "everything is off."]
